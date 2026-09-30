@@ -1,0 +1,112 @@
+```html
+{% if archivos %}
+    <div class="archivos-container">
+        <h2>Archivos disponibles</h2>
+
+        <div class="lista-archivos">
+            {% for archivo in archivos %}
+                <div class="archivo">
+                    <div class="archivo-info">
+                        <span class="archivo-icono">📄</span>
+
+                        <div>
+                            <a href="/subidas/{{ archivo.nombre }}" target="_blank">
+                                {{ archivo.nombre }}
+                            </a>
+                            <small>{{ archivo.tamano }}</small>
+                        </div>
+                    </div>
+
+                    <a class="boton-descargar"
+                       href="/subidas/{{ archivo.nombre }}"
+                       download>
+                        Descargar
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <div class="sin-archivos">
+        <p>📂 Todavía no hay archivos.</p>
+    </div>
+{% endif %}
+
+<style>
+    .archivos-container {
+        max-width: 800px;
+        margin: 30px auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    .archivos-container h2 {
+        margin-bottom: 20px;
+    }
+
+    .lista-archivos {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .archivo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background: #fff;
+    }
+
+    .archivo-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .archivo-icono {
+        font-size: 25px;
+    }
+
+    .archivo-info a {
+        display: block;
+        color: #2563eb;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .archivo-info a:hover {
+        text-decoration: underline;
+    }
+
+    .archivo-info small {
+        display: block;
+        margin-top: 4px;
+        color: #777;
+    }
+
+    .boton-descargar {
+        padding: 8px 14px;
+        border-radius: 7px;
+        background: #2563eb;
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .boton-descargar:hover {
+        background: #1d4ed8;
+    }
+
+    .sin-archivos {
+        max-width: 800px;
+        margin: 30px auto;
+        padding: 20px;
+        text-align: center;
+        color: #777;
+        font-family: Arial, sans-serif;
+    }
+</style>
+```

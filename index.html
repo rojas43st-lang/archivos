@@ -1,0 +1,175 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Subir archivos</title>
+
+    <script src="https://unpkg.com/htmx.org@2"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #1f2937;
+        }
+
+        .contenedor {
+            width: 90%;
+            max-width: 850px;
+            margin: 50px auto;
+        }
+
+        .encabezado {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .encabezado h1 {
+            margin-bottom: 8px;
+            font-size: 32px;
+        }
+
+        .encabezado p {
+            color: #6b7280;
+            margin: 0;
+        }
+
+        .tarjeta {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .tarjeta h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .formulario {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        input[type="file"] {
+            flex: 1;
+            min-width: 250px;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: #f9fafb;
+        }
+
+        button {
+            border: none;
+            padding: 11px 22px;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .archivos-titulo {
+            margin-bottom: 15px;
+        }
+
+        #archivos {
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .contenedor {
+                width: 94%;
+                margin: 25px auto;
+            }
+
+            .tarjeta {
+                padding: 20px;
+            }
+
+            .formulario {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            input[type="file"] {
+                width: 100%;
+                min-width: 0;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="contenedor">
+
+        <header class="encabezado">
+            <h1>📁 Subir archivos</h1>
+            <p>Selecciona un archivo para almacenarlo en el servidor.</p>
+        </header>
+
+        <!-- Formulario para subir archivos -->
+        <section class="tarjeta">
+
+            <h2>Seleccionar archivo</h2>
+
+            <form class="formulario"
+                  hx-post="/subir"
+                  hx-target="#archivos"
+                  hx-swap="innerHTML"
+                  hx-encoding="multipart/form-data">
+
+                <input
+                    type="file"
+                    name="archivo"
+                    required
+                >
+
+                <button type="submit">
+                    Subir archivo
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- Archivos almacenados -->
+        <section class="tarjeta">
+
+            <h2 class="archivos-titulo">📂 Archivos en el servidor</h2>
+
+            <div id="archivos">
+                {% include "_archivos.html" %}
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
+```
+
